@@ -28,9 +28,7 @@ const eslintConfig = [
     },
     plugins: {
       prettier: prettierPlugin
-    }
-  },
-  {
+    },
     ignores: ['node_modules', 'dist', '.next']
   }
 ];
