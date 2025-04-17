@@ -24,7 +24,7 @@
 
 ---
 
-# Используемый стек
+## Используемый стек
 
 - **Фреймворк:** [Next.js @15.3.0](https://nextjs.org/docs)
 - **Язык:** [TypeScript @^5](https://www.typescriptlang.org/docs/)
