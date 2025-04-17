@@ -1,36 +1,124 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧩 new-next-template
 
-## Getting Started
+Модульный шаблон на базе **Next.js** с использованием **Feature-Sliced Design (FSD)**, фокусирующийся на удобстве масштабирования, строгом code style и продуктивной разработке с помощью современного фронтенд-стека.
 
-First, run the development server:
+## 📚 Оглавление
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+0. [Минимальные требования перед запуском проекта](#Минимальные-требования-перед-запуском-проекта)
+1. [Используемый стек](#Используемый-стек)
+2. [Code style](#code-style)
+3. [Как включить авто форматирование кода в различных IDE](#как-включить-авто-форматирование-кода-в-различных-ide)
+4. [Структура проекта](#структура-проекта)
+5. [Комментирование кода](#комментирование-кода)
+6. [Команды](#команды)
+
+---
+
+## 🚀 Минимальные требования перед запуском проекта
+
+1. Ознакомьтесь с [используемым стеком](#используемый-стек).
+2. Установите:
+
+- **Node.js** `v18.20.4 (LTS)`
+- **npm** `v10.7.0 (Latest)`
+
+---
+
+## 🛠 Используемый стек
+
+- **Фреймворк:** [Next.js @15.3.0](https://nextjs.org/docs)
+- **Язык:** [TypeScript @^5](https://www.typescriptlang.org/docs/)
+- **Архитектура:** [Feature-Sliced Design](https://feature-sliced.design/ru)
+- **Стилизация:** [Tailwind CSS @^4](https://tailwindcss.com/), [SASS @^1.86.3](https://sass-lang.com/)
+- **UI компоненты:**
+  - [Radix UI](https://www.radix-ui.com/) (`@radix-ui/react-*`)
+  - [Lucide React](https://lucide.dev/)
+- **Тема приложения:** [next-themes](https://github.com/pacocoursey/next-themes)
+- **Анимации:** [tw-animate-css](https://github.com/ElMehdiLebbar/tw-animate-css)
+- **Хранилище:** [Zustand @^5](https://zustand-demo.pmnd.rs/)
+- **Работа с куками:** [js-cookie](https://github.com/js-cookie/js-cookie)
+- **Валидация:** [Zod @^3](https://zod.dev/)
+- **Утилиты:** `clsx`, `class-variance-authority`, `compose-function`
+- **Линтинг и автоформатирование:**
+  - [ESLint](https://eslint.org/)
+  - [Prettier](https://prettier.io/)
+  - [Husky](https://typicode.github.io/husky/#/)
+  - [lint-staged](https://github.com/okonet/lint-staged)
+
+---
+
+## 🎨 Code style
+
+В проекте включены строгие правила линтинга и автоформатирования.  
+Но есть **правила, которые не покрываются линтерами** — соблюдай их вручную, иначе 👀 прилетит на ревью.
+
+### 📁 Нэйминг
+
+| Сущность           | Формат                | Пример                     |
+| ------------------ | --------------------- | -------------------------- |
+| Файлы              | `kebab-case`          | `user-card.tsx`            |
+| Переменные/функции | `camelCase`           | `fetchUserData()`          |
+| Константы          | `SCREAM_CASE`         | `API_BASE_URL`             |
+| Компоненты         | `PascalCase`          | `UserForm.tsx`             |
+| Иконки             | `PascalCase` + `Icon` | `ArrowLeftIcon.tsx`        |
+| CSS-классы         | `БЭМ`                 | `block__element--modifier` |
+
+---
+
+## 🧠 Как включить авто форматирование кода в различных IDE
+
+### VS Code
+
+1. Установи плагины:
+
+   - ESLint
+   - Prettier
+
+2. В `.vscode/settings.json` добавь:
+
+```json
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": ["javascript", "typescript", "typescriptreact"]
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🏗 Структура проекта
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Проект построен по принципам **Feature-Sliced Design (FSD)**:
 
-## Learn More
+src/
+├── app/ # Next.js app directory
+├── shared/ # UI, utils, lib, config, constants
+├── entities/ # Сущности бизнес-логики (user, product)
+├── features/ # Фичи – поиски, фильтры, лайки
+├── widgets/ # Крупные компоненты (карточки, таблицы)
+├── pages/ # Маршруты (если не используешь app/)
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 💬 Комментирование кода
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Пиши комментарии в формате:
 
-## Deploy on Vercel
+```javascript
+// ❌ Плохо:
+const a = b + c;
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+// ✅ Хорошо:
+const priceWithTax = basePrice + tax; // Вычисляем итоговую цену с налогом
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🧾 Команды
+
+Команда | Назначение
+npm run dev | Запустить проект в режиме разработки
+npm run build | Собрать проект
+npm start | Запустить production-сборку
+npm run lint | Запустить линтер
+npm run prepare | Установить git-хуки через husky
