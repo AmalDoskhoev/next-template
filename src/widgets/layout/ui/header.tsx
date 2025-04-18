@@ -1,9 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
 import { useUserStore } from '@/app/store';
-import { ModeToggle } from '@/features/mode-toggle';
+import { AuthPopup } from '@/features/auth';
 import { UserNav } from '@/features/user-nav';
-import { AuthPopup } from './auth';
+import { ModeToggle } from '@/features/theme';
 
 export function Header() {
   const { user } = useUserStore();

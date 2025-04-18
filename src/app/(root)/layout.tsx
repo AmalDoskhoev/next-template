@@ -1,8 +1,6 @@
 'use client';
 
-import { BottomNav } from '@/widgets/bottom-nav';
-import { Footer } from '@/widgets/footer';
-import { Header } from '@/widgets/header';
+import { BottomNav, Footer, Header } from '@/widgets/layout';
 import React from 'react';
 
 export default function MainLayout({

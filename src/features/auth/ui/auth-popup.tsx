@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import {
   Dialog,
   DialogContent,
@@ -12,57 +11,38 @@ import {
   Input,
   Label
 } from '@/shared/ui';
-import { saveTokenStorage } from '@/shared/services';
 import { useUserStore } from '@/app/store';
+import { saveTokenStorage } from '@/shared/services';
+import { useAuthPopupCases } from '../model/auth.cases';
 
 export function AuthPopup() {
-  const [step, setStep] = React.useState(1);
-  const [phone, setPhone] = React.useState('');
-  const [smsCode, setSmsCode] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [name, setName] = React.useState('');
-
   const { toggleAuthPopup, authPopup, setUserData } = useUserStore();
+  const { step, nextStep, reset, phoneForm, codeForm, finalForm } =
+    useAuthPopupCases();
 
-  const handlePhoneSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Здесь должна быть логика отправки SMS
-    console.log('Отправка SMS на номер:', phone);
-    setStep(2);
-  };
+  const handlePhoneSubmit = phoneForm.handleSubmit(data => {
+    console.log(data);
+    nextStep();
+  });
 
-  const handleSmsSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Здесь должна быть логика проверки SMS кода
-    console.log('Проверка SMS кода:', smsCode);
-    // Предположим, что это новый пользователь
-    setStep(3);
-  };
+  const handleCodeSubmit = codeForm.handleSubmit(data => {
+    console.log(data);
+    nextStep();
+  });
 
-  const handleFinalSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleFinalSubmit = finalForm.handleSubmit(data => {
     saveTokenStorage('store');
-    setUserData({ id: 1, phone, email, name });
-    // Здесь должна быть логика сохранения данных пользователя
-    console.log('Сохранение данных:', { phone, email, name });
+    setUserData({ id: 1, phone: phoneForm.getValues().phone, ...data });
     toggleAuthPopup();
-    setStep(1);
-  };
-
-  const resetForm = () => {
-    setPhone('');
-    setSmsCode('');
-    setEmail('');
-    setName('');
-    setStep(1);
-  };
+    reset();
+  });
 
   return (
     <Dialog
       open={authPopup}
       onOpenChange={open => {
         toggleAuthPopup();
-        if (!open) resetForm();
+        if (!open) reset();
       }}
     >
       <DialogTrigger asChild>
@@ -82,6 +62,7 @@ export function AuthPopup() {
             {step === 3 && 'Заполните дополнительную информацию'}
           </DialogDescription>
         </DialogHeader>
+
         {step === 1 && (
           <form onSubmit={handlePhoneSubmit} className="space-y-4">
             <div className="space-y-2">
@@ -89,60 +70,79 @@ export function AuthPopup() {
               <Input
                 id="phone"
                 placeholder="+7 (999) 999-99-99"
-                value={phone}
-                onChange={e => setPhone(e.target.value)}
-                required
+                {...phoneForm.register('phone')}
               />
+              {phoneForm.formState.errors.phone && (
+                <p className="text-sm text-red-500">
+                  {phoneForm.formState.errors.phone.message}
+                </p>
+              )}
             </div>
             <Button type="submit" className="w-full">
               Получить код
             </Button>
-            <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary  ">
+            <div className="text-xs text-muted-foreground text-center">
               Нажимая «Получить код», вы соглашаетесь с нашими{' '}
-              <a href="#">Условиями обслуживания</a> и{' '}
-              <a href="#">политикой конфиденциальности</a>.
+              <a href="#" className="underline">
+                Условиями
+              </a>{' '}
+              и{' '}
+              <a href="#" className="underline">
+                политикой
+              </a>
+              .
             </div>
           </form>
         )}
+
         {step === 2 && (
-          <form onSubmit={handleSmsSubmit} className="space-y-4">
+          <form onSubmit={handleCodeSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="sms">Код из SMS</Label>
+              <Label htmlFor="code">Код из SMS</Label>
               <Input
-                id="sms"
+                id="code"
                 placeholder="Введите код"
-                value={smsCode}
-                onChange={e => setSmsCode(e.target.value)}
-                required
+                {...codeForm.register('code')}
               />
+              {codeForm.formState.errors.code && (
+                <p className="text-sm text-red-500">
+                  {codeForm.formState.errors.code.message}
+                </p>
+              )}
             </div>
             <Button type="submit" className="w-full">
               Подтвердить
             </Button>
           </form>
         )}
+
         {step === 3 && (
           <form onSubmit={handleFinalSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
-                type="email"
                 placeholder="your@email.com"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                required
+                {...finalForm.register('email')}
               />
+              {finalForm.formState.errors.email && (
+                <p className="text-sm text-red-500">
+                  {finalForm.formState.errors.email.message}
+                </p>
+              )}
             </div>
             <div className="space-y-2">
               <Label htmlFor="name">Имя</Label>
               <Input
                 id="name"
                 placeholder="Ваше имя"
-                value={name}
-                onChange={e => setName(e.target.value)}
-                required
+                {...finalForm.register('name')}
               />
+              {finalForm.formState.errors.name && (
+                <p className="text-sm text-red-500">
+                  {finalForm.formState.errors.name.message}
+                </p>
+              )}
             </div>
             <Button type="submit" className="w-full">
               Завершить регистрацию
