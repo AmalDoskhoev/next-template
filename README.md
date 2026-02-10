@@ -19,28 +19,28 @@
 1. Ознакомьтесь с [используемым стеком](#Используемый-стек).
 2. Установите:
 
-- **Node.js** `v22.14.0 (LTS)`
-- **npm** `v10.9.2 (Latest)`
+- **Node.js** `v22.x (LTS)` или новее
+- **npm** `v10.x` или новее
 
 ---
 
 ## Используемый стек
 
-- **Фреймворк:** [Next.js @15.3.0](https://nextjs.org/docs)
+- **Фреймворк:** [Next.js @^16](https://nextjs.org/docs), [React @^19](https://react.dev/)
 - **Язык:** [TypeScript @^5](https://www.typescriptlang.org/docs/)
 - **Архитектура:** [Feature-Sliced Design](https://feature-sliced.github.io/documentation/ru/)
-- **Стилизация:** [Tailwind CSS @^4](https://tailwindcss.com/), [SASS @^1.86.3](https://sass-lang.com/)
+- **Стилизация:** [Tailwind CSS @^4](https://tailwindcss.com/), [SASS @^1.97](https://sass-lang.com/)
 - **UI компоненты:**
-  - [shadcn/ui](https://ui.shadcn.com/)
+  - [shadcn/ui](https://ui.shadcn.com/) (Radix UI, tailwind-merge, tw-animate-css)
   - [Lucide React](https://lucide.dev/)
 - **Тема приложения:** [next-themes](https://github.com/pacocoursey/next-themes)
 - **Хранилище:** [Zustand @^5](https://zustand-demo.pmnd.rs/)
 - **Работа с куками:** [js-cookie](https://github.com/js-cookie/js-cookie)
-- **Работа с формами:** [React Hook Form](https://react-hook-form.com/get-started)
+- **Работа с формами:** [React Hook Form](https://react-hook-form.com/get-started), [@hookform/resolvers](https://github.com/react-hook-form/resolvers)
 - **Валидация:** [Zod @^3](https://zod.dev/)
-- **Утилиты:** `clsx`, `class-variance-authority`, `compose-function`
+- **Утилиты:** `clsx`, `class-variance-authority`, `compose-function`, `tailwind-merge`
 - **Линтинг и автоформатирование:**
-  - [ESLint](https://eslint.org/)
+  - [ESLint @^9](https://eslint.org/)
   - [Prettier](https://prettier.io/)
   - [Husky](https://typicode.github.io/husky/#/)
   - [lint-staged](https://github.com/okonet/lint-staged)
@@ -56,10 +56,10 @@
 
 | Сущность           | Формат                | Пример              |
 | ------------------ | --------------------- | ------------------- |
-| Файлы              | `kebab-case`          | `user-card.tsx`     |
+| Файлы              | `kebab-case`          | `/user-card`        |
 | Переменные/функции | `camelCase`           | `fetchUserData()`   |
 | Константы          | `SCREAM_CASE`         | `API_BASE_URL`      |
-| Компоненты         | `PascalCase`          | `UserForm.tsx`      |
+| Компоненты         | `kebab-case`          | `user-form.tsx`     |
 | Иконки             | `PascalCase` + `Icon` | `ArrowLeftIcon.tsx` |
 
 ---
@@ -169,9 +169,10 @@ const add = (a, b) => {
 
 ## Команды
 
-| Команда         | Назначение                             |
-| --------------- | -------------------------------------- |
-| npm run dev     | `Запустить проект в режиме разработки` |
-| npm run build   | `Собрать проект`                       |
-| npm run lint    | `Запустить линтер`                     |
-| npm run prepare | `Установить git-хуки через husky`      |
+| Команда         | Назначение                                       |
+| --------------- | ------------------------------------------------ |
+| npm run dev     | Запустить проект в режиме разработки (Turbopack) |
+| npm run build   | Собрать проект                                   |
+| npm run start   | Запустить production-сборку                      |
+| npm run lint    | Запустить линтер                                 |
+| npm run prepare | Установить git-хуки через husky                  |
