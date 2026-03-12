@@ -1,8 +1,10 @@
 'use client';
 
-import Link from 'next/link';
 import { LogOut, UserRound } from 'lucide-react';
+import Link from 'next/link';
 
+import { useUserStore } from '@/app/store';
+import { routes } from '@/shared/constants';
 import {
   Avatar,
   AvatarFallback,
@@ -16,8 +18,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/shared/ui';
-import { useUserStore } from '@/app/store';
-import { routes } from '@/shared/constants';
 
 export function UserNav() {
   const { logout, user } = useUserStore();

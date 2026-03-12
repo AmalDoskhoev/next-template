@@ -1,18 +1,19 @@
 'use client';
 
+import { useUserStore } from '@/app/store';
+import { saveTokenStorage } from '@/shared/services';
 import {
+  Button,
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  Button,
   Input,
   Label
 } from '@/shared/ui';
-import { useUserStore } from '@/app/store';
-import { saveTokenStorage } from '@/shared/services';
+
 import { useAuthPopupCases } from '../model/auth.cases';
 
 export function AuthPopup() {

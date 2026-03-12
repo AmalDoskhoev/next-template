@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+
 import { removeTokenFromStorage } from '@/shared/services';
 
 export interface UserEntity {
