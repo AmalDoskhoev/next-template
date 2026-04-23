@@ -13,7 +13,7 @@ export function Header() {
     <header className="sticky top-0 z-10 bg-background border-b">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <Link href="/">
-          <h1 className="text-2xl font-bold">AmalDoskhoev Template</h1>
+          <h1 className="text-2xl font-bold">Next template</h1>
         </Link>
         <div className="flex items-center gap-2">
           <ModeToggle />
