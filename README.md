@@ -36,6 +36,7 @@
 - **Тема приложения:** [next-themes](https://github.com/pacocoursey/next-themes)
 - **Хранилище:** [Zustand @^5](https://zustand-demo.pmnd.rs/)
 - **Работа с куками:** [js-cookie](https://github.com/js-cookie/js-cookie)
+- **HTTP-запросы:** [Axios @^1.16](https://axios-http.com/) — настроенный клиент в [`src/shared/core/client.ts`](src/shared/core/client.ts)
 - **Работа с формами:** [React Hook Form](https://react-hook-form.com/get-started), [@hookform/resolvers](https://github.com/react-hook-form/resolvers)
 - **Валидация:** [Zod @^3](https://zod.dev/)
 - **Утилиты:** `clsx`, `class-variance-authority`, `compose-function`, `tailwind-merge`
@@ -69,7 +70,6 @@
 ### VS Code
 
 1. Установи плагины:
-
    - ESLint
    - Prettier
 
@@ -109,7 +109,7 @@
 ```
 src/
 ├── app/ # Next.js app directory
-├── shared/ # UI, utils, lib, constants
+├── shared/ # UI, utils, lib, constants, HTTP-клиент (axios в shared/core)
 ├── entities/ # Сущности бизнес-логики (user, product)
 ├── features/ # Фичи – поиски, фильтры, лайки
 ├── widgets/ # Крупные компоненты (карточки, таблицы)
