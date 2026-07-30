@@ -1,1 +1,90 @@
 @use 'vendors/tailwind';
+
+/* h1 */
+.h1 {
+  scroll-margin: 20px;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* h2 */
+.h2 {
+  scroll-margin: 20px;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* h3 */
+.h3 {
+  scroll-margin: 20px;
+  font-size: 24px; /* text-2xl = 24px */
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* h4 */
+.h4 {
+  scroll-margin: 20px;
+  font-size: 20px; /* text-xl = 20px */
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* h5 */
+.h5 {
+  scroll-margin: 20px;
+  font-size: 16px; /* text-base = 16px */
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* label1 */
+.label1 {
+  scroll-margin: 20px;
+  font-size: 16px; /* text-base = 16px */
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* label2 */
+.label2 {
+  scroll-margin: 20px;
+  font-size: 14px; /* text-sm = 14px */
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* p1 */
+.p1 {
+  scroll-margin: 20px;
+  font-size: 16px; /* text-base = 16px */
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+/* p2 */
+.p2 {
+  scroll-margin: 20px;
+  font-size: 14px; /* text-sm = 14px */
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+/* caption1 */
+.caption1 {
+  scroll-margin: 20px;
+  font-size: 12px; /* text-xs = 12px */
+  font-weight: 500;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+/* caption2 */
+.caption2 {
+  scroll-margin: 20px;
+  font-size: 12px; /* text-xs = 12px */
+  font-weight: 500;
+  line-height: 1.4;
+}
