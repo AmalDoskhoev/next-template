@@ -33,11 +33,13 @@
 - **UI компоненты:**
   - [shadcn/ui](https://ui.shadcn.com/) (Radix UI, tailwind-merge, tw-animate-css)
   - [Lucide React](https://lucide.dev/)
+  - [Sonner](https://sonner.emilkowal.ski/) — тосты / уведомления
 - **Тема приложения:** [next-themes](https://github.com/pacocoursey/next-themes)
 - **Хранилище:** [Zustand @^5](https://zustand-demo.pmnd.rs/)
 - **Работа с куками:** [js-cookie](https://github.com/js-cookie/js-cookie)
 - **HTTP-запросы:** [Axios @^1.16](https://axios-http.com/) — настроенный клиент в [`src/shared/core/client.ts`](src/shared/core/client.ts)
 - **Работа с формами:** [React Hook Form](https://react-hook-form.com/get-started), [@hookform/resolvers](https://github.com/react-hook-form/resolvers)
+- **Маски ввода:** [react-imask](https://imask.js.org/guide.html#react-imask) — телефон и другие masked-поля
 - **Валидация:** [Zod @^3](https://zod.dev/)
 - **Утилиты:** `clsx`, `class-variance-authority`, `compose-function`, `tailwind-merge`
 - **Линтинг и автоформатирование:**
@@ -62,6 +64,12 @@
 | Константы          | `SCREAM_CASE`         | `API_BASE_URL`      |
 | Компоненты         | `kebab-case`          | `user-form.tsx`     |
 | Иконки             | `PascalCase` + `Icon` | `ArrowLeftIcon.tsx` |
+
+### 🎨 Стилизация
+
+- До **5** Tailwind-классов в компоненте — ок оставлять инлайн (`className`).
+- Если Tailwind-классов **больше 5** — выносим стили в **модульный SCSS** рядом с компонентом (`component-name.module.scss`).
+- **Исключение:** папка `shared/ui` — там допускается любое количество Tailwind-классов (shadcn/ui-паттерн).
 
 ---
 
