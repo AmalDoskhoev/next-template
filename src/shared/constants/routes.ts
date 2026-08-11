@@ -1,8 +1,9 @@
 export enum RoutesMap {
+  home = '',
   profile = 'profile'
 }
 
 export const routes = {
-  // Профиль
+  home: '/',
   profile: `/${RoutesMap.profile}`
 };

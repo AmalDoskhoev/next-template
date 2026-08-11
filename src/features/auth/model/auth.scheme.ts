@@ -1,7 +1,9 @@
 import { z } from 'zod';
 
+import { phoneSchema as sharedPhoneSchema } from '@/shared/constants';
+
 export const phoneSchema = z.object({
-  phone: z.string().min(1, 'Введите номер телефона')
+  phone: sharedPhoneSchema
 });
 
 export const smsCodeSchema = z.object({

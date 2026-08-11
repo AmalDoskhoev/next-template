@@ -5,9 +5,11 @@ import { getAccessToken } from '../services';
 export const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export const TOKEN_KEY = 'token';
 
-axios.defaults.baseURL = API_URL;
+const apiClient = axios.create({
+  baseURL: API_URL
+});
 
-axios.interceptors.request.use(config => {
+apiClient.interceptors.request.use(config => {
   if (typeof window !== 'undefined') {
     const token = getAccessToken();
 
@@ -19,6 +21,4 @@ axios.interceptors.request.use(config => {
   return config;
 });
 
-export * from 'axios';
-
-export default axios;
+export default apiClient;

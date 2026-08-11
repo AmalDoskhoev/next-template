@@ -41,12 +41,14 @@
 - **Работа с формами:** [React Hook Form](https://react-hook-form.com/get-started), [@hookform/resolvers](https://github.com/react-hook-form/resolvers)
 - **Маски ввода:** [react-imask](https://imask.js.org/guide.html#react-imask) — телефон и другие masked-поля
 - **Валидация:** [Zod @^3](https://zod.dev/)
-- **Утилиты:** `clsx`, `class-variance-authority`, `compose-function`, `tailwind-merge`
+- **Утилиты:** `clsx`, `class-variance-authority`, `tailwind-merge`
 - **Линтинг и автоформатирование:**
   - [ESLint @^9](https://eslint.org/)
   - [Prettier](https://prettier.io/)
   - [Husky](https://typicode.github.io/husky/#/)
   - [lint-staged](https://github.com/okonet/lint-staged)
+
+Для локального запуска скопируйте `.env.example` → `.env.local` и укажите `NEXT_PUBLIC_API_URL` вашего бэкенда.
 
 ---
 

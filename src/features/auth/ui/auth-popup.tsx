@@ -1,48 +1,85 @@
 'use client';
 
+import React from 'react';
+
 import { useUserStore } from '@/app/store';
 import { saveTokenStorage } from '@/shared/services';
 import {
   Button,
+  ControlledInput,
+  ControlledPhoneInput,
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
-  Input,
-  Label
+  DialogTrigger
 } from '@/shared/ui';
+import { errorNotification } from '@/shared/utils';
 
+import { registerUser, requestAuthCode, verifyAuthCode } from '../api/auth-api';
 import { useAuthPopupCases } from '../model/auth.cases';
 
 export function AuthPopup() {
-  const { toggleAuthPopup, authPopup, setUserData } = useUserStore();
+  const { setAuthPopup, authPopup, setUserData } = useUserStore();
   const { step, nextStep, reset, phoneForm, codeForm, finalForm } =
     useAuthPopupCases();
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
 
-  const handlePhoneSubmit = phoneForm.handleSubmit(data => {
-    console.log(data);
-    nextStep();
+  const handlePhoneSubmit = phoneForm.handleSubmit(async data => {
+    setIsSubmitting(true);
+
+    try {
+      await requestAuthCode(data);
+      nextStep();
+    } catch (error) {
+      errorNotification(error);
+    } finally {
+      setIsSubmitting(false);
+    }
   });
 
-  const handleCodeSubmit = codeForm.handleSubmit(data => {
-    console.log(data);
-    nextStep();
+  const handleCodeSubmit = codeForm.handleSubmit(async data => {
+    setIsSubmitting(true);
+
+    try {
+      await verifyAuthCode({
+        phone: phoneForm.getValues().phone,
+        code: data.code
+      });
+      nextStep();
+    } catch (error) {
+      errorNotification(error);
+    } finally {
+      setIsSubmitting(false);
+    }
   });
 
-  const handleFinalSubmit = finalForm.handleSubmit(data => {
-    saveTokenStorage('store');
-    setUserData({ id: 1, phone: phoneForm.getValues().phone, ...data });
-    toggleAuthPopup();
-    reset();
+  const handleFinalSubmit = finalForm.handleSubmit(async data => {
+    setIsSubmitting(true);
+
+    try {
+      const response = await registerUser({
+        phone: phoneForm.getValues().phone,
+        ...data
+      });
+
+      saveTokenStorage(response.token);
+      setUserData(response.user);
+      setAuthPopup(false);
+      reset();
+    } catch (error) {
+      errorNotification(error);
+    } finally {
+      setIsSubmitting(false);
+    }
   });
 
   return (
     <Dialog
       open={authPopup}
       onOpenChange={open => {
-        toggleAuthPopup();
+        setAuthPopup(open);
         if (!open) reset();
       }}
     >
@@ -66,20 +103,13 @@ export function AuthPopup() {
 
         {step === 1 && (
           <form onSubmit={handlePhoneSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="phone">Номер телефона</Label>
-              <Input
-                id="phone"
-                placeholder="+7 (999) 999-99-99"
-                {...phoneForm.register('phone')}
-              />
-              {phoneForm.formState.errors.phone && (
-                <p className="text-sm text-red-500">
-                  {phoneForm.formState.errors.phone.message}
-                </p>
-              )}
-            </div>
-            <Button type="submit" className="w-full">
+            <ControlledPhoneInput
+              control={phoneForm.control}
+              name="phone"
+              label="Номер телефона"
+              placeholder="+7 (999) 999-99-99"
+            />
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
               Получить код
             </Button>
             <div className="text-xs text-muted-foreground text-center">
@@ -98,20 +128,13 @@ export function AuthPopup() {
 
         {step === 2 && (
           <form onSubmit={handleCodeSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="code">Код из SMS</Label>
-              <Input
-                id="code"
-                placeholder="Введите код"
-                {...codeForm.register('code')}
-              />
-              {codeForm.formState.errors.code && (
-                <p className="text-sm text-red-500">
-                  {codeForm.formState.errors.code.message}
-                </p>
-              )}
-            </div>
-            <Button type="submit" className="w-full">
+            <ControlledInput
+              control={codeForm.control}
+              name="code"
+              label="Код из SMS"
+              placeholder="Введите код"
+            />
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
               Подтвердить
             </Button>
           </form>
@@ -119,33 +142,20 @@ export function AuthPopup() {
 
         {step === 3 && (
           <form onSubmit={handleFinalSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                placeholder="your@email.com"
-                {...finalForm.register('email')}
-              />
-              {finalForm.formState.errors.email && (
-                <p className="text-sm text-red-500">
-                  {finalForm.formState.errors.email.message}
-                </p>
-              )}
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="name">Имя</Label>
-              <Input
-                id="name"
-                placeholder="Ваше имя"
-                {...finalForm.register('name')}
-              />
-              {finalForm.formState.errors.name && (
-                <p className="text-sm text-red-500">
-                  {finalForm.formState.errors.name.message}
-                </p>
-              )}
-            </div>
-            <Button type="submit" className="w-full">
+            <ControlledInput
+              control={finalForm.control}
+              name="email"
+              label="Email"
+              type="email"
+              placeholder="your@email.com"
+            />
+            <ControlledInput
+              control={finalForm.control}
+              name="name"
+              label="Имя"
+              placeholder="Ваше имя"
+            />
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
               Завершить регистрацию
             </Button>
           </form>

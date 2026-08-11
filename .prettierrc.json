@@ -5,7 +5,7 @@
   "trailingComma": "none",
   "semi": true,
   "jsxSingleQuote": false,
-  "jsxBracketSameLine": false,
+  "bracketSameLine": false,
   "arrowParens": "avoid",
   "bracketSpacing": true,
   "endOfLine": "auto"

@@ -1,6 +1,7 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  output: 'standalone',
   turbopack: {
     rules: {
       '*.svg': [
@@ -18,7 +19,8 @@ const nextConfig: NextConfig = {
                     {
                       name: 'preset-default',
                       params: { overrides: { removeViewBox: false } }
-                    }
+                    },
+                    'prefixIds'
                   ]
                 }
               }

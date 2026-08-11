@@ -1,10 +1,12 @@
+'use client';
+
 import Link from 'next/link';
-import React from 'react';
 
 import { useUserStore } from '@/app/store';
 import { AuthPopup } from '@/features/auth';
 import { ModeToggle } from '@/features/theme';
 import { UserNav } from '@/features/user-nav';
+import { routes } from '@/shared/constants';
 
 export function Header() {
   const { user } = useUserStore();
@@ -12,7 +14,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-10 bg-background border-b">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-        <Link href="/">
+        <Link href={routes.home}>
           <h1 className="text-2xl font-bold">Next template</h1>
         </Link>
         <div className="flex items-center gap-2">

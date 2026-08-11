@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 
 import { BottomNav, Footer, Header } from '@/widgets/layout';

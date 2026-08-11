@@ -15,6 +15,7 @@ export interface UserStoreState {
   loading: boolean;
 
   setUserData: (data: UserEntity) => void;
+  setAuthPopup: (open: boolean) => void;
   toggleAuthPopup: () => void;
   logout: () => void;
 }
@@ -22,10 +23,14 @@ export interface UserStoreState {
 export const useUserStore = create<UserStoreState>((set, get) => ({
   user: null,
   authPopup: false,
-  loading: true,
+  loading: false,
 
   setUserData: (data: UserEntity) => {
     set({ user: data });
+  },
+
+  setAuthPopup: (open: boolean) => {
+    set({ authPopup: open });
   },
 
   toggleAuthPopup: () => {
