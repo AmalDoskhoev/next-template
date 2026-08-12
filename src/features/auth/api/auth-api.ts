@@ -1,6 +1,6 @@
-import type { UserEntity } from '@/app/store';
 import { Endpoints } from '@/shared/constants';
 import apiClient from '@/shared/core';
+import { UserEntity } from '@/shared/model';
 
 export type RequestCodePayload = {
   phone: string;

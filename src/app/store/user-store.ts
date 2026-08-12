@@ -1,13 +1,7 @@
 import { create } from 'zustand';
 
+import { UserEntity } from '@/shared/model';
 import { removeTokenFromStorage } from '@/shared/services';
-
-export interface UserEntity {
-  id: number;
-  email: string;
-  name: string;
-  phone: string;
-}
 
 export interface UserStoreState {
   user: UserEntity | null;
@@ -15,6 +9,7 @@ export interface UserStoreState {
   loading: boolean;
 
   setUserData: (data: UserEntity) => void;
+  setLoading: (loading: boolean) => void;
   setAuthPopup: (open: boolean) => void;
   toggleAuthPopup: () => void;
   logout: () => void;
@@ -27,6 +22,10 @@ export const useUserStore = create<UserStoreState>((set, get) => ({
 
   setUserData: (data: UserEntity) => {
     set({ user: data });
+  },
+
+  setLoading: (loading: boolean) => {
+    set({ loading });
   },
 
   setAuthPopup: (open: boolean) => {
