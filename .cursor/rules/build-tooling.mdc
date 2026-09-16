@@ -9,4 +9,4 @@ alwaysApply: true
 - Скрипты: `npm run dev` (Turbopack), `build`, `start`, `lint`.
 - Production Next: `output: 'standalone'`.
 - Env: `NEXT_PUBLIC_*` из `.env` / CI; не коммить секреты — ориентир `.env.example`.
-- Husky + lint-staged: на commit — `eslint --fix` + Prettier.
+- Husky + lint-staged: на commit — `eslint --fix` + Prettier; на push — `npm run build`.
