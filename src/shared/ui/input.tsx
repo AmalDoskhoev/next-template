@@ -1,16 +1,40 @@
+import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
 
 import { cn } from '@/shared/utils';
 
 import { Typography } from './typography';
 
-type InputProps = React.ComponentProps<'input'> & {
-  label?: string;
-  error?: string;
-  startAdornment?: React.ReactNode;
-  endAdornment?: React.ReactNode;
-  rootClassName?: string;
-};
+const inputWrapVariants = cva(
+  'flex items-center w-full gap-2 border bg-(--white) transition focus-within:border-(--amber-500) focus-within:ring-[3px] focus-within:ring-amber-500/30',
+  {
+    variants: {
+      inputSize: {
+        sm: 'h-8 px-3',
+        md: 'h-10 px-3.5',
+        lg: 'h-12 px-4'
+      },
+      pill: {
+        true: 'rounded-full',
+        false: 'rounded-[10px]'
+      }
+    },
+    defaultVariants: {
+      inputSize: 'md',
+      pill: false
+    }
+  }
+);
+
+type InputProps = React.ComponentProps<'input'> &
+  VariantProps<typeof inputWrapVariants> & {
+    label?: string;
+    hint?: string;
+    error?: string;
+    startAdornment?: React.ReactNode;
+    endAdornment?: React.ReactNode;
+    rootClassName?: string;
+  };
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
   {
@@ -18,11 +42,14 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
     rootClassName,
     type,
     label,
+    hint,
     error,
     id,
     startAdornment,
     endAdornment,
     disabled,
+    inputSize,
+    pill,
     'aria-invalid': ariaInvalid,
     ...props
   },
@@ -33,13 +60,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
   const isInvalid = !!error || !!ariaInvalid;
 
   return (
-    <div className={cn('flex flex-col', rootClassName)}>
+    <div className={cn('flex flex-col gap-2', rootClassName)}>
       {label && (
         <Typography
-          variant="h5"
+          variant="caption2"
           component="label"
           htmlFor={inputId}
-          className="mb-3"
+          className="font-semibold text-(--gray-600)"
         >
           {label}
         </Typography>
@@ -47,16 +74,17 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
 
       <div
         className={cn(
-          'border-input dark:bg-input/30 flex h-9 w-full min-w-0 items-center rounded-md border bg-transparent shadow-xs transition-[color,box-shadow]',
-          'focus-within:border-ring focus-within:ring-ring/50 focus-within:ring-[3px]',
+          inputWrapVariants({ inputSize, pill }),
           isInvalid &&
-            'border-destructive ring-destructive/20 dark:ring-destructive/40 ring-[3px]',
-          disabled && 'pointer-events-none cursor-not-allowed opacity-50',
+            'border-(--red-500) focus-within:border-(--red-500) focus-within:ring-[3px] focus-within:ring-red-500/30',
+          !isInvalid && 'border-(--gray-300)',
+          disabled &&
+            'pointer-events-none cursor-not-allowed bg-(--gray-100) opacity-60',
           className
         )}
       >
         {startAdornment && (
-          <div className="flex shrink-0 items-center justify-center pl-2">
+          <div className="flex shrink-0 items-center justify-center text-(--gray-500)">
             {startAdornment}
           </div>
         )}
@@ -68,24 +96,25 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
           disabled={disabled}
           data-slot="input"
           className={cn(
-            'file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground h-full w-full min-w-0 bg-transparent px-3 py-1 text-base outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:cursor-not-allowed md:text-sm',
-            startAdornment && 'pl-2',
-            endAdornment && 'pr-1'
+            'h-full w-full min-w-0 bg-transparent text-sm text-(--ink-900) outline-none placeholder:text-(--gray-500) disabled:cursor-not-allowed'
           )}
           {...props}
           aria-invalid={isInvalid}
         />
 
         {endAdornment && (
-          <div className="flex shrink-0 items-center justify-center pr-1.5">
+          <div className="flex shrink-0 items-center justify-center">
             {endAdornment}
           </div>
         )}
       </div>
 
-      {error && (
-        <Typography variant="caption2" className="mt-1 text-destructive">
-          {error}
+      {(error || hint) && (
+        <Typography
+          variant="caption2"
+          className={error ? 'text-(--red-600)' : 'text-(--gray-500)'}
+        >
+          {error || hint}
         </Typography>
       )}
     </div>

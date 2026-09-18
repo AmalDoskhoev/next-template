@@ -6,6 +6,7 @@ import { Typography } from './typography';
 
 type TextareaProps = React.ComponentProps<'textarea'> & {
   label?: string;
+  hint?: string;
   error?: string;
   rootClassName?: string;
 };
@@ -16,6 +17,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       className,
       rootClassName,
       label,
+      hint,
       error,
       id,
       disabled,
@@ -29,13 +31,13 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     const isInvalid = !!error || !!ariaInvalid;
 
     return (
-      <div className={cn('flex flex-col', rootClassName)}>
+      <div className={cn('flex flex-col gap-2', rootClassName)}>
         {label && (
           <Typography
-            variant="h5"
+            variant="caption2"
             component="label"
             htmlFor={textareaId}
-            className="mb-3"
+            className="font-semibold text-(--gray-600)"
           >
             {label}
           </Typography>
@@ -48,19 +50,22 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           disabled={disabled}
           aria-invalid={isInvalid}
           className={cn(
-            'border-input dark:bg-input/30 placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground field-sizing-content min-h-24 w-full resize-none rounded-md border bg-transparent px-3 py-2 text-base shadow-xs outline-none transition-[color,box-shadow] md:text-sm',
-            'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
+            'min-h-24 w-full resize-y rounded-[10px] border border-(--gray-300) bg-(--white) px-3.5 py-3 text-sm leading-[1.55] text-(--ink-900) outline-none transition placeholder:text-(--gray-500)',
+            'focus-visible:border-(--amber-500) focus-visible:ring-[3px] focus-visible:ring-amber-500/30',
             isInvalid &&
-              'border-destructive ring-destructive/20 dark:ring-destructive/40 ring-[3px]',
-            disabled && 'cursor-not-allowed opacity-50',
+              'border-(--red-500) focus-visible:border-(--red-500) focus-visible:ring-[3px] focus-visible:ring-red-500/30',
+            disabled && 'cursor-not-allowed bg-(--gray-100) opacity-60',
             className
           )}
           {...props}
         />
 
-        {error && (
-          <Typography variant="caption2" className="mt-1 text-destructive">
-            {error}
+        {(error || hint) && (
+          <Typography
+            variant="caption2"
+            className={error ? 'text-(--red-600)' : 'text-(--gray-500)'}
+          >
+            {error || hint}
           </Typography>
         )}
       </div>

@@ -34,7 +34,6 @@
   - [shadcn/ui](https://ui.shadcn.com/) (Radix UI, tailwind-merge, tw-animate-css)
   - [Lucide React](https://lucide.dev/)
   - [Sonner](https://sonner.emilkowal.ski/) — тосты / уведомления
-- **Тема приложения:** [next-themes](https://github.com/pacocoursey/next-themes)
 - **Хранилище:** [Zustand @^5](https://zustand-demo.pmnd.rs/)
 - **Работа с куками:** [js-cookie](https://github.com/js-cookie/js-cookie)
 - **HTTP-запросы:** [Axios @^1.16](https://axios-http.com/) — настроенный клиент в [`src/shared/core/client.ts`](src/shared/core/client.ts)

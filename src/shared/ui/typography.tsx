@@ -3,6 +3,9 @@ import type { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react';
 import { cn } from '@/shared/utils';
 
 export type TypographyVariant =
+  | 'display1'
+  | 'display2'
+  | 'display3'
   | 'h1'
   | 'h2'
   | 'h3'
@@ -12,10 +15,15 @@ export type TypographyVariant =
   | 'label2'
   | 'p1'
   | 'p2'
+  | 'bodySm'
   | 'caption1'
-  | 'caption2';
+  | 'caption2'
+  | 'metric';
 
 const variantClasses: Record<TypographyVariant, string> = {
+  display1: 'display1',
+  display2: 'display2',
+  display3: 'display3',
   h1: 'h1',
   h2: 'h2',
   h3: 'h3',
@@ -25,22 +33,29 @@ const variantClasses: Record<TypographyVariant, string> = {
   label2: 'label2',
   p1: 'p1',
   p2: 'p2',
+  bodySm: 'bodySm',
   caption1: 'caption1',
-  caption2: 'caption2'
+  caption2: 'caption2',
+  metric: 'metric'
 };
 
 const defaultVariantMapping: Record<TypographyVariant, ElementType> = {
+  display1: 'h1',
+  display2: 'h1',
+  display3: 'h1',
   h1: 'h1',
   h2: 'h2',
-  h3: 'p',
-  h4: 'p',
-  h5: 'p',
+  h3: 'h3',
+  h4: 'h4',
+  h5: 'h5',
   label1: 'p',
   label2: 'p',
   p1: 'p',
   p2: 'p',
+  bodySm: 'p',
   caption1: 'p',
-  caption2: 'p'
+  caption2: 'p',
+  metric: 'p'
 };
 
 type TypographyProps<C extends ElementType = ElementType> = {

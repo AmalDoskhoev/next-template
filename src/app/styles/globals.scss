@@ -1,90 +1,213 @@
 @use 'vendors/tailwind';
 
-/* h1 */
+:root {
+  --amber-50: #fff9ec;
+  --amber-100: #feefd3;
+  --amber-200: #fddca2;
+  --amber-300: #fdc966;
+  --amber-400: #fcbb3b;
+  --amber-500: #fbac14;
+  --amber-600: #e09104;
+  --amber-700: #ae7003;
+  --amber-900: #5c3b02;
+
+  --ink-900: #0a0a0a;
+  --ink-800: #141414;
+  --ink-700: #1f1f1f;
+  --ink-600: #2e2e2e;
+
+  --gray-700: #4f4f4f;
+  --gray-600: #6b6b6b;
+  --gray-500: #8e8e8e;
+  --gray-400: #b5b5b5;
+  --gray-300: #d2d2d2;
+  --gray-200: #e4e4e4;
+  --gray-100: #efefef;
+  --gray-50: #f6f6f6;
+  --white: #ffffff;
+
+  --red-100: #fde3e3;
+  --red-500: #f04949;
+  --red-600: #d62f2f;
+  --red-700: #9c1f1f;
+}
+
+.display1 {
+  scroll-margin: 20px;
+  font-size: 56px;
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+}
+
+.display2 {
+  scroll-margin: 20px;
+  font-size: 44px;
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+}
+
+.display3 {
+  scroll-margin: 20px;
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
 .h1 {
   scroll-margin: 20px;
-  font-size: 40px;
+  font-size: 28px;
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 1.16;
+  letter-spacing: -0.015em;
 }
 
-/* h2 */
 .h2 {
   scroll-margin: 20px;
-  font-size: 32px;
+  font-size: 22px;
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 1.22;
+  letter-spacing: -0.01em;
 }
 
-/* h3 */
 .h3 {
   scroll-margin: 20px;
-  font-size: 24px; /* text-2xl = 24px */
+  font-size: 18px;
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
 }
 
-/* h4 */
 .h4 {
   scroll-margin: 20px;
-  font-size: 20px; /* text-xl = 20px */
+  font-size: 16px;
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 1.55;
 }
 
-/* h5 */
 .h5 {
   scroll-margin: 20px;
-  font-size: 16px; /* text-base = 16px */
+  font-size: 14px;
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 1.55;
 }
 
-/* label1 */
 .label1 {
   scroll-margin: 20px;
-  font-size: 16px; /* text-base = 16px */
+  font-size: 16px;
   font-weight: 500;
-  line-height: 1.4;
+  line-height: 1.55;
 }
 
-/* label2 */
 .label2 {
   scroll-margin: 20px;
-  font-size: 14px; /* text-sm = 14px */
+  font-size: 14px;
   font-weight: 500;
-  line-height: 1.4;
+  line-height: 1.55;
 }
 
-/* p1 */
 .p1 {
   scroll-margin: 20px;
-  font-size: 16px; /* text-base = 16px */
+  font-size: 16px;
   font-weight: 400;
-  line-height: 1.4;
+  line-height: 1.55;
 }
 
-/* p2 */
 .p2 {
   scroll-margin: 20px;
-  font-size: 14px; /* text-sm = 14px */
+  font-size: 14px;
   font-weight: 400;
-  line-height: 1.4;
+  line-height: 1.55;
 }
 
-/* caption1 */
+.bodySm {
+  scroll-margin: 20px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
 .caption1 {
   scroll-margin: 20px;
-  font-size: 12px; /* text-xs = 12px */
+  font-size: 11px;
   font-weight: 500;
-  line-height: 1.4;
+  line-height: 1.35;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-/* caption2 */
 .caption2 {
   scroll-margin: 20px;
-  font-size: 12px; /* text-xs = 12px */
+  font-size: 12px;
   font-weight: 500;
   line-height: 1.4;
+}
+
+.metric {
+  scroll-margin: 20px;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+input[type='number'] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  font-family:
+    'Urbanist',
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-900);
+  background: var(--gray-50);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--amber-200);
+}
+
+html body[data-scroll-locked] {
+  margin-right: 0 !important;
+  padding-right: 0 !important;
+  --removed-body-scroll-bar-size: 0px;
+}
+
+*:not(html):not(body) {
+  scrollbar-width: thin;
+  scrollbar-color: var(--gray-300) transparent;
+}
+
+*:not(html):not(body)::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+*:not(html):not(body)::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*:not(html):not(body)::-webkit-scrollbar-thumb {
+  background: var(--gray-300);
+  border-radius: 4px;
 }

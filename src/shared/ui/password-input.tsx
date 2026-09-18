@@ -3,7 +3,7 @@
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import * as React from 'react';
 
-import { Button } from './button';
+import { IconButton } from './icon-button';
 import { Input } from './input';
 
 type PasswordInputProps = Omit<
@@ -25,20 +25,20 @@ const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(
         ref={ref}
         type={showPassword ? 'text' : 'password'}
         endAdornment={
-          <Button
+          <IconButton
             type="button"
             variant="ghost"
-            size="icon"
-            className="size-6 p-0"
+            size="sm"
+            className="size-6"
             onClick={togglePasswordVisibility}
             aria-label={showPassword ? 'Скрыть пароль' : 'Показать пароль'}
           >
             {showPassword ? (
-              <EyeOffIcon className="text-muted-foreground" />
+              <EyeOffIcon className="text-(--gray-500)" />
             ) : (
-              <EyeIcon className="text-muted-foreground" />
+              <EyeIcon className="text-(--gray-500)" />
             )}
-          </Button>
+          </IconButton>
         }
       />
     );
