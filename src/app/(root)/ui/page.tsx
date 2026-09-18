@@ -217,16 +217,8 @@ export default function UiPage() {
   const [tagVisible, setTagVisible] = React.useState(true);
 
   return (
-    <div className="flex flex-col gap-12 py-10">
-      <div className="flex flex-col gap-2">
-        <Typography variant="caption1" className="text-(--gray-500)">
-          Design system
-        </Typography>
-        <Typography variant="display3">Компоненты</Typography>
-        <Typography variant="p2" className="text-(--gray-600)">
-          Палитра и UI-примитивы New Ailam: Urbanist, янтарь из логотипа.
-        </Typography>
-      </div>
+    <div className="flex flex-col gap-12">
+      <Typography variant="h2">Компоненты</Typography>
 
       <Section title="Colors">
         {COLOR_GROUPS.map(group => (

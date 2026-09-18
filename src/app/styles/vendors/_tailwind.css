@@ -102,7 +102,7 @@
   --sidebar-foreground: var(--ink-900);
   --sidebar-primary: var(--ink-900);
   --sidebar-primary-foreground: var(--white);
-  --sidebar-accent: var(--gray-100);
+  --sidebar-accent: var(--white);
   --sidebar-accent-foreground: var(--ink-900);
   --sidebar-border: var(--gray-200);
   --sidebar-ring: var(--amber-500);

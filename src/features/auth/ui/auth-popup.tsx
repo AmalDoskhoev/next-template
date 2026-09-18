@@ -84,7 +84,7 @@ export function AuthPopup() {
       }}
     >
       <DialogTrigger asChild>
-        <Button className="hidden md:flex" variant="ghost">
+        <Button variant="ghost" size="sm">
           Войти
         </Button>
       </DialogTrigger>

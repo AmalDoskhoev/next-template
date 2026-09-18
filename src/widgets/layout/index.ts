@@ -1,3 +1,3 @@
-export { BottomNav } from './ui/bottom-nav';
-export { Footer } from './ui/footer';
-export { Header } from './ui/header';
+export { APP_NAV_ITEMS } from './model/nav';
+export { AppShell } from './ui/app-shell';
+export { AppSidebar } from './ui/app-sidebar';
